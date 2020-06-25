@@ -1,18 +1,18 @@
 package com.example.demo.entidades;
-
+//Aqui vai a declaração da entidade usuário junto com os métodos getters e setters além do equals e hashCode para futuras comparações
 import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-@Entity
+@Entity //Converter objetos pro modelo relacional do DB
 public class User implements Serializable {
 	
 	
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id //Pra avisar que o ID do DB
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //Como é uma chave que sera auto incrementada, tem que instanciar pro Spring
 	private Integer id;
 	private String name;
 	private String email;
