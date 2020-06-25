@@ -1,12 +1,19 @@
 package com.example.demo.entidades;
 //Aqui vai a declaração da entidade usuário junto com os métodos getters e setters além do equals e hashCode para futuras comparações
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity //Converter objetos pro modelo relacional do DB
+@Table(name="tb_user") //evitar conflitos entre o nome da tabela e a classe order
 public class User implements Serializable {
 	
 	
@@ -19,6 +26,13 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 	
+	@JsonIgnore //serve para não ocorrer um Loop no jackson, que é quem faz a serialização e conexão das entidades
+	//se você carregar um objeto muitos para um o objeto um vem automaticamente, o outro não ocorre, isso é o lazy loading
+	@OneToMany(mappedBy="client") //faz a associação um usuario para muitos pedidos por meio do objeto client da classe order por meio de map
+	private List<Order> orders = new ArrayList<>();
+	
+
+	
 	public User(){};
 	public User(Integer id, String name, String email, String phone, String password) {
 		super();
@@ -28,6 +42,10 @@ public class User implements Serializable {
 		this.phone = phone;
 		this.password = password;
 	}
+	public List<Order> getOrders() {
+		return orders;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
