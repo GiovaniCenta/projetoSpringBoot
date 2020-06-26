@@ -47,6 +47,7 @@ public class TestConfig implements CommandLineRunner { //nesse momento essa clas
 		Category c1= new Category(null,"Computador");
 		Category c2 = new Category(null,"Video-game");
 		Category c3 = new Category(null,"Livro");
+		Category c4 = new Category(null,"Eletronico");
 		
 		Product p1 = new Product(null,"PS4","Playstation 4",2500.00,"sony.com/ps4.png");
 		Product p2 = new Product(null,"Revolucao dos bixos","psdjsuhda dsahudashudsa",50.00,"livros.com/rvdb.png");
@@ -54,10 +55,21 @@ public class TestConfig implements CommandLineRunner { //nesse momento essa clas
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, ""); 
 		
-		categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
+		categoryRepository.saveAll(Arrays.asList(c1,c2,c3,c4));
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));//salvar essa lista no banco de dados
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 		 
+		p1.getCategories().add(c1); //adicionar categorias aos produtos
+		p1.getCategories().add(c4);
+		p2.getCategories().add(c3);
+		p3.getCategories().add(c1);
+		p3.getCategories().add(c4);
+		p4.getCategories().add(c4);
+		p4.getCategories().add(c1);
+		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4));
+		
+
+		
 	}
 }
