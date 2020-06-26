@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity //Converter objetos pro modelo relacional do DB
-@Table(name="tb_user") //evitar conflitos entre o nome da tabela e a classe order
+@Table(name="tb_user") //evitar conflitos entre o nome da tabela e a classe 
 public class User implements Serializable {
 	
 	
