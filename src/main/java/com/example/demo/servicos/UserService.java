@@ -27,4 +27,26 @@ public class UserService {
 		return obj.get(); //retorna o obj optional
 	}
 
+	public User insert(User obj) {
+		return repository.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
+	
+	public User update(Integer id, User obj) {
+		User entity=repository.getOne(id);
+		updateData(entity,obj);
+		return repository.save(entity);
+	}
+
+	private void updateData(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+		
+		
+		
+	}
 }
