@@ -2,6 +2,8 @@ package com.example.demo.entidades;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.demo.entidades.enums.OrderStatus;
+import com.example.demo.entidades.pk.OrderItem;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -33,6 +37,12 @@ public class Order implements Serializable {
 	@ManyToOne //aqui se usa manyToOne
 	@JoinColumn(name = "client_id") //a chave estrangeira que conecta as duas é client_id
 	private User client;
+	
+	
+	//Pra recuperar os varios items do pedido
+	//
+	@OneToMany(mappedBy = "id.order") //como ta mapeando pelo OrderItem, usamos o campo id para mapear o set
+	private Set<OrderItem> items= new HashSet<>();
 	
 	public Order() {}
 
@@ -83,6 +93,12 @@ public class Order implements Serializable {
 		return serialVersionUID;
 	}
 
+	
+	public Set<OrderItem> getItems(){
+		return items;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

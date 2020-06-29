@@ -14,7 +14,9 @@ import com.example.demo.entidades.Order;
 import com.example.demo.entidades.Product;
 import com.example.demo.entidades.User;
 import com.example.demo.entidades.enums.OrderStatus;
+import com.example.demo.entidades.pk.OrderItem;
 import com.example.demo.repositories.CategoryRepository;
+import com.example.demo.repositories.OrderItemRepository;
 import com.example.demo.repositories.OrderRepository;
 import com.example.demo.repositories.ProductRepository;
 import com.example.demo.repositories.UserRepository;
@@ -34,6 +36,8 @@ public class TestConfig implements CommandLineRunner { //nesse momento essa clas
 	@Autowired
 	private ProductRepository productRepository;
 	
+	@Autowired
+	private OrderItemRepository orderitemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,7 +73,11 @@ public class TestConfig implements CommandLineRunner { //nesse momento essa clas
 		p4.getCategories().add(c1);
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4));
 		
-
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
+		orderitemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
 	}
 }
