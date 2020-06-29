@@ -78,6 +78,9 @@ public class OrderItem {
 		return true;
 	}
 	
+	public Double getSubTotal() {
+		return price*quantity;
+	}
 	
 
 }
